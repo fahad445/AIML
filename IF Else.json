@@ -1,0 +1,118 @@
+{
+  "name": "IF Else",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e975d6c2-54f5-4a74-9bcc-9c44b75745ef",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1KC9CsPBZrZnjIJr88qopLCWqnJ06hsXLjdZuBIVrtDo",
+          "mode": "list",
+          "cachedResultName": "Invoice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KC9CsPBZrZnjIJr88qopLCWqnJ06hsXLjdZuBIVrtDo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1082056771,
+          "mode": "list",
+          "cachedResultName": "customer_invoices",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KC9CsPBZrZnjIJr88qopLCWqnJ06hsXLjdZuBIVrtDo/edit#gid=1082056771"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "394328f4-c566-49bb-ba9f-e21470648984",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "s8R3tpUlZYjqGXpe",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "60767832-d04c-4ea6-b9ab-7c6fba956aca",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "Paid",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "f334036e-38f1-4191-8c8c-c8e97d131d29",
+      "name": "Filter"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "805e5e59-016d-44fc-9943-e861a64d6c1e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "93729a26569d9165ce0dbf7d796425a482583231cb0a1c0672e03559b124644b"
+  },
+  "id": "LNUSgQ4eVNlTaYjL",
+  "tags": []
+}
